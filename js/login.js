@@ -18,7 +18,6 @@ const app = {
         const { token, expired } = res.data;
         // console.log(token, expired);
         document.cookie = `mytoken=${token}; expires=${new Date(expired)};path=/`;//將存取到的token存入cookie
-        axios.defaults.headers.common['Authorization'] = token; //defaults表示每次都帶入
         window.location="product.html";
       })
       .catch((err) => {
