@@ -1,6 +1,9 @@
 const {createApp} = Vue;
 let productModal='';
 let deleteModal='';
+import pagination from '../components/pagination.js';//匯入外部元件
+import productmodal from '../components/productmodal.js';
+import deletemodal from '../components/deletemodal.js';
 const app={
   data(){
     return{
@@ -10,7 +13,8 @@ const app={
       },
       apiUrl:'https://vue3-course-api.hexschool.io/v2',
       apiPath:'leo533',
-      isNew:false
+      isNew:false,
+      page:{}//儲存分頁的資訊
     }
   },
   methods:{
@@ -23,10 +27,11 @@ const app={
         window.location='login.html';
       })
     },
-    getProducts(){
-      axios.get(`${this.apiUrl}/api/${this.apiPath}/admin/products/all`)
+    getProducts(page=1){
+      axios.get(`${this.apiUrl}/api/${this.apiPath}/admin/products/?page=${page}`)
       .then((res)=>{
         this.products=res.data.products;
+        this.page=res.data.pagination;
       })
       .catch((err)=>{
         alert(err.res.data.message);
@@ -99,4 +104,9 @@ const app={
 
   }
 }
-createApp(app).mount('#app')
+createApp(app)
+
+.component('pagination',pagination)//由外部匯入的元件，使用全域註冊方式
+.component('productmodal',productmodal)
+.component('deletemodal',deletemodal)
+.mount('#app')
