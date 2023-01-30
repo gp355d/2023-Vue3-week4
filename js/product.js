@@ -1,10 +1,10 @@
 const {createApp} = Vue;
 let productModal='';
 let deleteModal='';
-import pagination from '../components/pagination.js';//匯入外部元件
-import productmodal from '../components/productmodal.js';
-import deletemodal from '../components/deletemodal.js';
-const app={
+import paginationComponents from '../components/pagination.js';//匯入外部元件
+import productModalcomponents from '../components/productModal.js';
+import deleteModalcomponents from '../components/deleteModal.js';
+const app=createApp({
   data(){
     return{
       products:[],
@@ -24,6 +24,7 @@ const app={
         this.getProducts();
       })
       .catch((err) => {
+        alert(err.data.message);
         window.location='login.html';
       })
     },
@@ -34,7 +35,7 @@ const app={
         this.page=res.data.pagination;
       })
       .catch((err)=>{
-        alert(err.res.data.message);
+        alert(err.data.message);
       })
     },
     //新增和編輯資料共用同一個modal
@@ -75,7 +76,7 @@ const app={
         this.getProducts();//更新資料後再重新讀取資料
       })
       .catch((err)=>{
-        alert(err.response.data.message);
+        alert(err.data.message);
       })
     },
     deleteProduct(){
@@ -87,7 +88,7 @@ const app={
         this.getProducts();
       })
       .catch((err)=>{
-        alert(err.response.data.message);
+        alert(err.data.message);
       })
     },
     createImages() {
@@ -101,12 +102,11 @@ const app={
     this.check();
     productModal = new bootstrap.Modal(document.querySelector('#productModal'));
     deleteModal = new bootstrap.Modal(document.querySelector('#delProductModal'));
-
   }
-}
-createApp(app)
-
-.component('pagination',pagination)//由外部匯入的元件，使用全域註冊方式
-.component('productmodal',productmodal)
-.component('deletemodal',deletemodal)
-.mount('#app')
+});
+//元件
+app.component('pagination',paginationComponents);//由外部匯入的元件，使用全域註冊方式
+app.component('productModal',productModalcomponents);
+app.component('deleteModal',deleteModalcomponents);
+//掛載
+app.mount('#app');

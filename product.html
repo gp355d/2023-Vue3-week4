@@ -84,12 +84,12 @@
         <!-- @chenge-page="getProducts" 由(內部)分頁元件emit觸發(外部)data內的methods -->
       </div>
     </div>
-    <productmodal :temp-products="tempProducts" @update-data="updateProduct" :is-new="isNew" @create-img="createImages"></productmodal>
+    <product-modal :temp-products="tempProducts" @update-data="updateProduct" :is-new="isNew" @create-img="createImages"></product-modal>
     <!-- :temp-products="tempProducts" 對應modal元件props屬性內的tempProducts=data內的tempProducts object -->
     <!-- :is-new="isNew" 對應modal元件props屬性內的isNew=data內的isNew屬性 -->
     <!-- @update-data="updateProduct" 由(內部)modal元件emit觸發(外部)data內的methods -->
     <!-- @create-img="createImages" 由(內部)modal元件emit觸發(外部)data內的methods -->
-    <deletemodal :temp-products="tempProducts" @delete-data="deleteProduct"></deletemodal>
+    <delete-modal :temp-products="tempProducts" @delete-data="deleteProduct"></delete-modal>
     <!-- :temp-products="tempProducts" 對應modal元件props屬性內的tempProducts=data內的tempProducts object -->
     <!-- @delete-data="deleteProduct"  由(內部)deletemodal元件emit觸發(外部)data內的methods-->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.9.1/axios.min.js"></script>
