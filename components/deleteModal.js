@@ -19,7 +19,7 @@ export default{
          取消
        </button>
        <button type="button" class="btn btn-danger" @click="$emit('delete-data')">
-         確認刪除
+         確認刪除1
        </button>
      </div>
    </div>
